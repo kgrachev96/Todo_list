@@ -1,0 +1,13 @@
+    {
+        "extends": [
+            "tslint:latest",
+            "tslint-react"
+        ],
+        "rules": {
+            "no-console": false,
+            "jsx-no-lambda": false,
+            "jsx-no-multiline-js": false,
+            "radix": false,
+            "member-ordering": false
+        }
+    }

@@ -1,0 +1,37 @@
+{
+  "name": "todo_list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack -p",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kgrachev96/Todo_list.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kgrachev96/Todo_list/issues"
+  },
+  "homepage": "https://github.com/kgrachev96/Todo_list#readme",
+  "dependencies": {
+    "@types/react": "^16.0.34",
+    "@types/react-addons-css-transition-group": "^15.0.3",
+    "@types/react-dom": "^16.0.3",
+    "axios": "^0.17.1",
+    "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "^16.2.0",
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/webpack": "^3.8.2",
+    "ts-loader": "^3.2.0",
+    "tslint": "^5.9.1",
+    "tslint-react": "^3.3.3",
+    "webpack": "^3.10.0"
+  }
+}
