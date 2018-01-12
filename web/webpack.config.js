@@ -5,7 +5,7 @@ module.exports = {
 
     output: {
         filename: "app.js",
-        path: path.resolve(__dirname, './build')
+        path: path.resolve(__dirname, '../web/build')
     },
 
     resolve: {
@@ -17,7 +17,7 @@ module.exports = {
             test: /\.tsx$/,
             loader: 'ts-loader',
             options: {
-                configFile: 'tsconfig.json'
+                configFile: 'tsconfig.web.json'
             }
         }]
     }
