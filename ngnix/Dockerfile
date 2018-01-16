@@ -1,12 +1,14 @@
+FROM todolist_web:latest as web
 FROM nginx
+
+COPY --from=web /opt/app/build /var/www/
+
+RUN echo $(ls -1 /var/www/)
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY ./web/build /var/www
-COPY ./node_modules /var/www/node_modules
+RUN echo $(ls -1 /etc/nginx/nginx.conf)
 
 WORKDIR /etc/nginx
-
-EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

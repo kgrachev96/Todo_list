@@ -25,14 +25,14 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public componentDidMount() {
-        axios.get("/api/todos")
+        axios.get("localhost:3000/api/todo")
             .then((response: any) => response.data)
             .then((todos: any) => this.setState({ todos, filteredTodos: todos }))
             .catch(this.handleError);
     }
 
     public handleStatusChange(id: any) {
-        axios.patch(`/api/todos/${id}`)
+        axios.patch(`localhost:3000/api/todo${id}`)
             .then((response) => {
                 const todos = this.state.todos.map((todo: Itodo) => {
                     if (todo.id === id) {
@@ -49,7 +49,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public handleAdd(title: string) {
-        axios.post("/api/todos", { title })
+        axios.post("localhost:3000/api/todo", { title })
             .then((response) => response.data)
             .then((todo) => {
                 const todos = [...this.state.todos, todo];
@@ -63,7 +63,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public handleEdit(id: any, title: any) {
-        axios.put(`/api/todos/${id}`, { title })
+        axios.put(`localhost:3000/api/todo${id}`, { title })
             .then((response) => {
                 const todos = this.state.todos.map((todo: Itodo) => {
                     if (todo.id === id) {
@@ -77,7 +77,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public handleDelete(id: any) {
-        axios.delete(`/api/todos/${id}`)
+        axios.delete(`localhost:3000/api/todo${id}`)
             .then(() => {
                 const todos = this.state.todos.filter((todo: Itodo) => todo.id !== id);
                 this.setState({ todos });
