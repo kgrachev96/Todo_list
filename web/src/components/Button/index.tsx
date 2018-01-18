@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default class Button extends React.Component<IBProp, any> {
+export default class Button extends React.Component<any, any> {
     public render() {
         return (
             <button

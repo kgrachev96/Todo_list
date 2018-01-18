@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default class CheckBox extends React.Component<ICProp, ICState> {
+export default class CheckBox extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);

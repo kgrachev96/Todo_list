@@ -9,7 +9,7 @@ export default class Stats extends React.Component<any, any> {
     public render() {
 
         const total = this.props.todos.length;
-        const completed = this.props.todos.filter((todo: Itodo) => todo.completed).length;
+        const completed = this.props.todos.filter((todo: any) => todo.completed).length;
         const notCompleted = total - completed;
 
         return (

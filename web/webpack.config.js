@@ -20,5 +20,6 @@ module.exports = {
                 configFile: 'tsconfig.web.json'
             }
         }]
-    }
+    },
+    devtool: 'inline-source-map'
 };

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import Stats from "../Stats";
 
-export default class Head extends React.Component<IHProp, any> {
+export default class Head extends React.Component<any, any> {
     public render() {
         return (
             <header className="head">

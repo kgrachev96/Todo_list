@@ -4,7 +4,7 @@ import Button from "../Button";
 import CheckBox from "../CheckBox";
 import Search from "../Search";
 
-export default class Todo extends React.Component<IProp, any> {
+export default class Todo extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
