@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import axios from "axios";
 import * as React from "react";
 import * as ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import * as ReactDOM from "react-dom";
@@ -17,73 +17,73 @@ export default class App extends React.Component<any, any> {
             todos: [],
         };
 
-        // this.handleStatusChange = this.handleStatusChange.bind(this);
-        // this.handleDelete = this.handleDelete.bind(this);
-        // this.handleAdd = this.handleAdd.bind(this);
-        // this.handleEdit = this.handleEdit.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
         this.filterBy = this.filterBy.bind(this);
     }
 
-    // public componentDidMount() {
-    //     axios.get("http://localhost:3000/api/todo")
-    //         .then((response: any) => response.data)
-    //         .then((todos: any) => this.setState({ todos }))
-    //         .catch(this.handleError);
-    // }
+    public componentDidMount() {
+        axios.get("http://localhost:3000/api/initial")
+            .then((response: any) => response.data)
+            .then((todos: any) => this.setState({ todos }))
+            .catch(this.handleError);
+    }
 
-    // public handleStatusChange(id: any) {
-    //     axios.patch(`http://127.0.0.1:3000/api/todo${id}`)
-    //         .then((response) => {
-    //             const todos = this.state.todos.map((todo: any) => {
-    //                 if (todo.id === id) {
-    //                     todo = response.data;
-    //                 }
+    public handleStatusChange(id: any) {
+        axios.patch(`http://127.0.0.1:3000/api/todo${id}`)
+            .then((response) => {
+                const todos = this.state.todos.map((todo: any) => {
+                    if (todo.id === id) {
+                        todo = response.data;
+                    }
 
-    //                 return todo;
-    //             });
+                    return todo;
+                });
 
-    //             this.setState({ todos });
-    //         })
-    //         .catch(this.handleError);
+                this.setState({ todos });
+            })
+            .catch(this.handleError);
 
-    // }
+    }
 
-    // public handleAdd(title: string) {
-    //     axios.post("http://localhost:3000/api/todo", { title })
-    //         .then((response) => response.data)
-    //         .then((todo) => {
-    //             const todos = [...this.state.todos, todo];
-    //             this.setState({ todos });
-    //         })
-    //         .catch(this.handleError);
-    // }
+    public handleAdd(title: string) {
+        axios.post("http://localhost:3000/api/todo", { title })
+            .then((response) => response.data)
+            .then((todo) => {
+                const todos = [...this.state.todos, todo];
+                this.setState({ todos });
+            })
+            .catch(this.handleError);
+    }
 
-    // public handleError(error: any) {
-    //     console.error(error);
-    // }
+    public handleError(error: any) {
+        console.error(error);
+    }
 
-    // public handleEdit(id: any, title: any) {
-    //     axios.put(`http://127.0.0.1:3000/api/todo${id}`, { title })
-    //         .then((response) => {
-    //             const todos = this.state.todos.map((todo: any) => {
-    //                 if (todo.id === id) {
-    //                     todo = response.data;
-    //                 }
-    //                 return todo;
-    //             });
-    //             this.setState({ todos });
-    //         })
-    //         .catch(this.handleError);
-    // }
+    public handleEdit(id: any, title: any) {
+        axios.put(`http://127.0.0.1:3000/api/todo${id}`, { title })
+            .then((response) => {
+                const todos = this.state.todos.map((todo: any) => {
+                    if (todo.id === id) {
+                        todo = response.data;
+                    }
+                    return todo;
+                });
+                this.setState({ todos });
+            })
+            .catch(this.handleError);
+    }
 
-    // public handleDelete(id: any) {
-    //     axios.delete(`http://127.0.0.1:3000/api/todo${id}`)
-    //         .then(() => {
-    //             const todos = this.state.todos.filter((todo: any) => todo.id !== id);
-    //             this.setState({ todos });
-    //         })
-    //         .catch(this.handleError);
-    // }
+    public handleDelete(id: any) {
+        axios.delete(`http://127.0.0.1:3000/api/todo${id}`)
+            .then(() => {
+                const todos = this.state.todos.filter((todo: any) => todo.id !== id);
+                this.setState({ todos });
+            })
+            .catch(this.handleError);
+    }
 
     public filterBy(field: any, value: any) {
         if (value !== "") {
@@ -119,13 +119,13 @@ export default class App extends React.Component<any, any> {
                             id={todo.id}
                             title={todo.title}
                             completed={todo.completed}
-                        // onStatusChange={this.handleStatusChange}
-                        // onDelete={this.handleDelete}
-                        // onEdit={this.handleEdit}
+                            onStatusChange={this.handleStatusChange}
+                            onDelete={this.handleDelete}
+                            onEdit={this.handleEdit}
                         />))}
 
                 </ReactCSSTransitionGroup>
-                {/* <Form onAdd={this.handleAdd} /> */}
+                <Form onAdd={this.handleAdd} />
 
             </main>
         );
