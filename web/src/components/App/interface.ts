@@ -3,12 +3,11 @@ interface IMProp {
 }
 
 interface IMState {
-    todos: any;
-    filteredTodos: any;
+    todos: Array<{ id: number, title: string, completed: boolean }>;
 }
 
 interface Itodo {
-    id: string;
+    id: number;
     title: string;
     completed: boolean;
     [field: string]: any;
