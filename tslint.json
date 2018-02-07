@@ -8,6 +8,8 @@
             "jsx-no-lambda": false,
             "jsx-no-multiline-js": false,
             "radix": false,
-            "member-ordering": false
+            "member-ordering": false,
+            "object-literal-sort-keys": false,
+            "max-line-length": false
         }
     }

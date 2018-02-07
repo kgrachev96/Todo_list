@@ -10,5 +10,4 @@ interface Itodo {
     id: number;
     title: string;
     completed: boolean;
-    [field: string]: any;
 }

@@ -16,43 +16,41 @@ export default class App extends React.Component<IMProp, IMState> {
             todos: [],
         };
 
-        // this.handleStatusChange = this.handleStatusChange.bind(this);
-        // this.handleDelete = this.handleDelete.bind(this);
+        this.handleStatusChange = this.handleStatusChange.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
-        // this.handleEdit = this.handleEdit.bind(this);
-        // this.filterBy = this.filterBy.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+        this.searchBy = this.searchBy.bind(this);
     }
 
     public componentDidMount() {
         axios.get("http://localhost:3000/api/initial")
             .then((res: any) => {
                 const newTodo = res.data;
-                console.log(newTodo);
-                this.setState({ todos: newTodo });
-                console.log([...this.state.todos]);
+                this.setState({ todos: newTodo, filteredTodos: newTodo });
             })
             .catch(this.handleError);
     }
 
-    // public handleStatusChange(id: any) {
-    //     axios.patch(`http://127.0.0.1:3000/api/todo${id}`)
-    //         .then((response) => {
-    //             const todos = this.state.todos.map((todo: any) => {
-    //                 if (todo.id === id) {
-    //                     todo = response.data;
-    //                 }
+    public handleStatusChange(id: any) {
+        axios.patch(`http://localhost:3000/api/todoStatus/${id}`)
+            .then((response) => {
+                const todos = this.state.todos.map((todo: any) => {
+                    if (todo.id === id) {
+                        todo = response.data;
+                    }
 
-    //                 return todo;
-    //             });
+                    return todo;
+                });
 
-    //             this.setState({ todos });
-    //         })
-    //         .catch(this.handleError);
+                this.setState({ todos });
+            })
+            .catch(this.handleError);
 
-    // }
+    }
 
     public handleAdd(title: string) {
-        axios.post("http://localhost:3000/api/addTodo", { title })
+        axios.post("http://localhost:3000/api/todoAdd", { title })
             .then((res: any) => res.data)
             .then((todo) => {
                 const todos = [...this.state.todos, todo];
@@ -65,48 +63,44 @@ export default class App extends React.Component<IMProp, IMState> {
         console.error(error);
     }
 
-    // public handleEdit(id: any, title: any) {
-    //     axios.put(`http://127.0.0.1:3000/api/todo${id}`, { title })
-    //         .then((response) => {
-    //             const todos = this.state.todos.map((todo: any) => {
-    //                 if (todo.id === id) {
-    //                     todo = response.data;
-    //                 }
-    //                 return todo;
-    //             });
-    //             this.setState({ todos });
-    //         })
-    //         .catch(this.handleError);
-    // }
+    public handleEdit(id: any, title: any) {
+        axios.put(`http://localhost:3000/api/todoSave/${id}`, { title })
+            .then((response) => {
+                const todos = this.state.todos.map((todo: any) => {
+                    if (todo.id === id) {
+                        todo = response.data;
+                    }
+                    return todo;
+                });
+                this.setState({ todos });
+            })
+            .catch(this.handleError);
+    }
 
-    // public handleDelete(id: any) {
-    //     axios.delete(`http://127.0.0.1:3000/api/todo${id}`)
-    //         .then(() => {
-    //             const todos = this.state.todos.filter((todo: any) => todo.id !== id);
-    //             this.setState({ todos });
-    //         })
-    //         .catch(this.handleError);
-    // }
+    public handleDelete(id: any) {
+        axios.delete(`http://localhost:3000/api/todoDelete/${id}`)
+            .then(() => {
+                const todos = this.state.todos.filter((todo: any) => todo.id !== id);
+                this.setState({ todos });
+            })
+            .catch(this.handleError);
+    }
 
-    // public filterBy(field: any, value: any) {
-    //     if (value !== "") {
-    //         const filteredTodos = this.state.todos.filter((todo: any) => todo[field].includes(value));
-    //         this.setState({ filteredTodos });
-    //     } else {
-    //         this.setState({ filteredTodos: this.state.todos });
-    //     }
-    // }
+    public searchBy(searchTodo: any, filter: Array<{ id: number, title: string, completed: boolean }>) {
+        (searchTodo !== "") ? this.setState({ todos: filter }) : this.componentDidMount();
+    }
 
     public render() {
 
         return (
 
             <main>
-                {/* <Search filterBy={this.filterBy} /> */}
+                <Search searchBy={this.searchBy} todos={this.state.todos} />
                 <Head
                     text="Список задач"
                     todos={this.state.todos}
                 />
+
                 <ReactCSSTransitionGroup
                     component="section"
                     className="list-todo"
@@ -122,12 +116,15 @@ export default class App extends React.Component<IMProp, IMState> {
                             id={todo.id}
                             title={todo.title}
                             completed={todo.completed}
-                        // onStatusChange={this.handleStatusChange}
-                        // onDelete={this.handleDelete}
-                        // onEdit={this.handleEdit}
-                        />))}
+                            onStatusChange={this.handleStatusChange}
+                            onDelete={this.handleDelete}
+                            onEdit={this.handleEdit}
+                        />
+
+                    ))}
 
                 </ReactCSSTransitionGroup>
+
                 <Form onAdd={this.handleAdd} />
 
             </main>

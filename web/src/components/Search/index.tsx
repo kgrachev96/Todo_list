@@ -3,20 +3,12 @@ import * as React from "react";
 export default class Search extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
-
-        this.state = {
-            searchTodo: "",
-        };
         this.handleChange = this.handleChange.bind(this);
     }
-
     public handleChange(event: any) {
         const searchTodo = event.target.value;
-        this.setState({ searchTodo });
-        if (searchTodo) {
-            this.props.filterBy("title", searchTodo);
-        }
-
+        const filter = this.props.todos.filter((todo: any) => todo.title.toLowerCase().startsWith(searchTodo.toLowerCase()));
+        this.props.searchBy(searchTodo, filter);
     }
 
     public render() {
@@ -24,8 +16,6 @@ export default class Search extends React.Component<any, any> {
             <form className="search">
                 <input
                     className="search_todo"
-                    type="text"
-                    value={this.state.searchTodo}
                     placeholder="Что нужно найти?"
                     onChange={this.handleChange}
                 />
