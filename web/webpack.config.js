@@ -1,7 +1,10 @@
 const path = require('path');
 
 module.exports = {
-    entry: "./src/app.tsx",
+    entry: [
+        "webpack-dev-server/client?http://localhost:8080/",
+        "./src/app.tsx"
+    ],
 
     output: {
         filename: "app.js",
