@@ -1,4 +1,4 @@
-FROM todolist_web:latest as web
+FROM mytasklist_web:latest as web
 FROM nginx
 
 COPY --from=web /opt/app/build /var/www/static/
