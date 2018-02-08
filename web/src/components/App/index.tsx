@@ -27,7 +27,7 @@ export default class App extends React.Component<IMProp, IMState> {
         axios.get("http://localhost:3000/api/initial")
             .then((res: any) => {
                 const newTodo = res.data;
-                this.setState({ todos: newTodo, filteredTodos: newTodo });
+                this.setState({ todos: newTodo });
             })
             .catch(this.handleError);
     }
