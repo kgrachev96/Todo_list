@@ -4,14 +4,14 @@ services:
   web:
     build: ./web
     ports:
-    - "8080:8080"
+    - "8080"
     restart: always
 
 
   ngnix:
     build: ./ngnix
     ports:
-    - "80:80"
+    - "80"
     links:
     - web:web
     restart: always
