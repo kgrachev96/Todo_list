@@ -24,7 +24,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public componentDidMount() {
-        axios.get("http://localhost:3000/api/initial")
+        axios.get("http://mytasklist.info:3000/api/initial")
             .then((res: any) => {
                 const newTodo = res.data;
                 this.setState({ todos: newTodo });
@@ -33,7 +33,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public handleStatusChange(id: any) {
-        axios.patch(`http://localhost:3000/api/todoStatus/${id}`)
+        axios.patch(`http://mytasklist.info:3000/api/todoStatus/${id}`)
             .then((response) => {
                 const todos = this.state.todos.map((todo: any) => {
                     if (todo.id === id) {
@@ -50,7 +50,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public handleAdd(title: string) {
-        axios.post("http://localhost:3000/api/todoAdd", { title })
+        axios.post("http://mytasklist.info:3000/api/todoAdd", { title })
             .then((res: any) => res.data)
             .then((todo) => {
                 const todos = [...this.state.todos, todo];
@@ -64,7 +64,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public handleEdit(id: any, title: any) {
-        axios.put(`http://localhost:3000/api/todoSave/${id}`, { title })
+        axios.put(`http://mytasklist.info:3000/api/todoSave/${id}`, { title })
             .then((response) => {
                 const todos = this.state.todos.map((todo: any) => {
                     if (todo.id === id) {
@@ -78,7 +78,7 @@ export default class App extends React.Component<IMProp, IMState> {
     }
 
     public handleDelete(id: any) {
-        axios.delete(`http://localhost:3000/api/todoDelete/${id}`)
+        axios.delete(`http://mytasklist.info:3000/api/todoDelete/${id}`)
             .then(() => {
                 const todos = this.state.todos.filter((todo: any) => todo.id !== id);
                 this.setState({ todos });
