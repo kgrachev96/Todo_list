@@ -119,6 +119,7 @@ export default class App extends React.Component<IMProp, IMState> {
                             onStatusChange={this.handleStatusChange}
                             onDelete={this.handleDelete}
                             onEdit={this.handleEdit}
+
                         />
 
                     ))}
